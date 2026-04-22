@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WhatsApp Clone</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- SIDEBAR -->
+      <div class="sidebar">
+        <div id="userList"></div>
+      </div>
+
+      <!-- CHAT -->
+      <div class="chat-area">
+        <div class="chat-header">
+          <span id="chatTitle">Pilih Chat</span>
+          <span id="typing" class="typing"></span>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <div class="input-box">
+          <input id="message" oninput="typing()" placeholder="Tulis pesan..." />
+          <button onclick="sendMessage()">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WAJIB URUTAN INI -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>

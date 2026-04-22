@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Login WhatsApp Clone</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Login</h2>
+
+        <input id="username" placeholder="Username" />
+        <input id="password" type="password" placeholder="Password" />
+
+        <button onclick="login()">Login</button>
+        <a href="register.html">
+          <button type="button">Register</button>
+        </a>
+        <div id="message" class="link"></div>
+      </div>
+    </div>
+
+    <script>
+      const messageBox = document.getElementById("message");
+
+      function showMessage(text, color = "red") {
+        messageBox.innerText = text;
+        messageBox.style.color = color;
+      }
+
+      // ================= REGISTER =================
+      function register() {
+        const usernameVal = username.value.trim();
+        const passwordVal = password.value.trim();
+
+        if (!usernameVal || !passwordVal) {
+          return showMessage("Username & Password wajib diisi!");
+        }
+
+        fetch("/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: usernameVal,
+            password: passwordVal,
+          }),
+        })
+          .then((r) => r.json())
+          .then((res) => {
+            if (res.error) {
+              showMessage(res.error);
+            } else {
+              showMessage("Register berhasil! Silakan login.", "green");
+            }
+          })
+          .catch(() => showMessage("Server tidak bisa diakses"));
+      }
+
+      // ================= LOGIN =================
+      function login() {
+        const usernameVal = username.value.trim();
+        const passwordVal = password.value.trim();
+
+        if (!usernameVal || !passwordVal) {
+          return showMessage("Username & Password wajib diisi!");
+        }
+
+        fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: usernameVal,
+            password: passwordVal,
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.error) {
+              showMessage(data.error);
+            } else {
+              localStorage.setItem("user", JSON.stringify(data.user));
+              localStorage.setItem("token", data.token);
+
+              window.location.href = "chat.html";
+            }
+          })
+          .catch(() => showMessage("Server tidak bisa diakses"));
+      }
+    </script>
+  </body>
+</html>

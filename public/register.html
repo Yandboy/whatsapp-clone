@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="auth-container">
+      <div class="auth-box">
+        <h2>Register</h2>
+
+        <input type="text" id="username" placeholder="Username" />
+        <input type="password" id="password" placeholder="Password" />
+
+        <button onclick="register()">Register</button>
+
+        <div class="link">Sudah punya akun? <a href="index.html">Login</a></div>
+      </div>
+    </div>
+
+    <script>
+      async function register() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        const res = await fetch("http://localhost:3000/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await res.json();
+
+        if (data.error) {
+          alert(data.error);
+        } else {
+          alert("Register berhasil!");
+          window.location.href = "index.html";
+        }
+      }
+    </script>
+  </body>
+</html>

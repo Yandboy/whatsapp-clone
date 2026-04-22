@@ -1,0 +1,203 @@
+/* =========================
+   RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* =========================
+   LOGIN / REGISTER
+========================= */
+.auth-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #d7f8f0, #e5ddd5);
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 360px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.auth-box h2 {
+  margin-bottom: 20px;
+  color: #128c7e;
+}
+
+.auth-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.auth-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-box button:first-of-type {
+  background: #128c7e;
+  color: white;
+}
+
+.auth-box a button {
+  background: #25d366;
+  color: white;
+}
+
+.link {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* =========================
+   APP WRAPPER
+========================= */
+.container {
+  display: flex;
+  height: 100vh;
+  background: #dcdcdc;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 30%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+/* HEADER SIDEBAR */
+.sidebar::before {
+  content: "Chat";
+  display: block;
+  padding: 15px;
+  font-weight: bold;
+  background: #ededed;
+  border-bottom: 1px solid #ddd;
+}
+
+/* CHAT LIST */
+.chat-item {
+  padding: 15px;
+  border-bottom: 1px solid #f1f1f1;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.chat-item:hover {
+  background: #f5f5f5;
+}
+
+/* ACTIVE CHAT */
+.chat-item.active {
+  background: #e9f5f3;
+}
+
+/* =========================
+   CHAT AREA
+========================= */
+.chat-area {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  background: #efeae2;
+}
+
+/* HEADER */
+.chat-header {
+  padding: 15px;
+  background: #ededed;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+/* MESSAGES */
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* BUBBLE */
+.msg {
+  max-width: 50%;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* SENDER */
+.me {
+  background: #dcf8c6;
+  margin-left: auto;
+  border-bottom-right-radius: 2px;
+}
+
+/* RECEIVER */
+.other {
+  background: #fff;
+  border-bottom-left-radius: 2px;
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+.input-box {
+  display: flex;
+  padding: 10px;
+  background: #f0f0f0;
+  border-top: 1px solid #ddd;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+}
+
+.input-box button {
+  margin-left: 10px;
+  padding: 10px 18px;
+  border-radius: 25px;
+  border: none;
+  background: #128c7e;
+  color: white;
+  cursor: pointer;
+}
+
+/* =========================
+   SCROLLBAR (BONUS)
+========================= */
+.messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
