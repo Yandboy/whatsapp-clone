@@ -1,4 +1,6 @@
-const socket = io();
+const BASE_URL = "http://72.61.140.205:5000"; // kalau VPS isi: "http://IP_VPS:5000"
+
+const socket = io(BASE_URL);
 
 let user = JSON.parse(localStorage.getItem("user"));
 
@@ -14,7 +16,7 @@ socket.emit("join", user.id);
 
 // ================= LOAD USERS =================
 function loadUsers() {
-  fetch("/users")
+  fetch(BASE_URL + "/users")
     .then((res) => res.json())
     .then((users) => {
       const list = document.getElementById("userList");
@@ -31,7 +33,8 @@ function loadUsers() {
 
         list.appendChild(div);
       });
-    });
+    })
+    .catch(() => console.log("Gagal load users"));
 }
 
 // ================= OPEN CHAT =================
@@ -47,22 +50,24 @@ function openChat(e, chatId, name) {
 
   e.target.classList.add("active");
 
-  // reset chat
-  document.getElementById("messages").innerHTML = "";
+  loadMessages(); // 🔥 penting
 }
 
-function openChat(e, chatId, name) {
-  activeChat = { id: chatId, name };
+// ================= LOAD MESSAGES =================
+function loadMessages() {
+  if (!activeChat) return;
 
-  document.getElementById("chatTitle").innerText = name;
+  fetch(`${BASE_URL}/messages/${user.id}/${activeChat.id}`)
+    .then((res) => res.json())
+    .then((messages) => {
+      const box = document.getElementById("messages");
+      box.innerHTML = "";
 
-  document.querySelectorAll(".chat-item").forEach((el) => {
-    el.classList.remove("active");
-  });
-
-  e.target.classList.add("active");
-
-  loadMessages();
+      messages.forEach((msg) => {
+        renderMessage(msg);
+      });
+    })
+    .catch(() => console.log("Gagal load messages"));
 }
 
 // ================= SEND MESSAGE =================
@@ -79,13 +84,18 @@ function sendMessage() {
 
   socket.emit("private_message", msg);
 
-  renderMessage(msg);
+  // ❌ HAPUS renderMessage di sini (biar tidak dobel)
   input.value = "";
 }
 
 // ================= RECEIVE =================
 socket.on("private_message", (data) => {
-  renderMessage(data);
+  // 🔥 hanya tampilkan kalau chat aktif
+  if (!activeChat) return;
+
+  if (data.sender_id === activeChat.id || data.receiver_id === activeChat.id) {
+    renderMessage(data);
+  }
 });
 
 // ================= RENDER =================
@@ -98,21 +108,6 @@ function renderMessage(data) {
 
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
-}
-
-function loadMessages() {
-  if (!activeChat) return;
-
-  fetch(`/messages/${user.id}/${activeChat.id}`)
-    .then((res) => res.json())
-    .then((messages) => {
-      const box = document.getElementById("messages");
-      box.innerHTML = "";
-
-      messages.forEach((msg) => {
-        renderMessage(msg);
-      });
-    });
 }
 
 // ================= TYPING =================
