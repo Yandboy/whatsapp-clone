@@ -2,24 +2,20 @@
 <html>
   <head>
     <title>Login WhatsApp Clone</title>
-
-    <!-- FIX CSS -->
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
     <div class="auth-container">
       <div class="auth-box">
         <h2>Login</h2>
 
-        <input id="username" placeholder="Username" autocomplete="off" />
+        <input id="username" placeholder="Username" />
         <input id="password" type="password" placeholder="Password" />
 
         <button onclick="login()">Login</button>
-
         <a href="register.html">
           <button type="button">Register</button>
         </a>
-
         <div id="message" class="link"></div>
       </div>
     </div>
@@ -32,8 +28,8 @@
         messageBox.style.color = color;
       }
 
-      // ================= LOGIN =================
-      async function login() {
+      // ================= REGISTER =================
+      function register() {
         const usernameVal = username.value.trim();
         const passwordVal = password.value.trim();
 
@@ -41,29 +37,54 @@
           return showMessage("Username & Password wajib diisi!");
         }
 
-        try {
-          const res = await fetch("/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              username: usernameVal,
-              password: passwordVal,
-            }),
-          });
+        fetch("/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: usernameVal,
+            password: passwordVal,
+          }),
+        })
+          .then((r) => r.json())
+          .then((res) => {
+            if (res.error) {
+              showMessage(res.error);
+            } else {
+              showMessage("Register berhasil! Silakan login.", "green");
+            }
+          })
+          .catch(() => showMessage("Server tidak bisa diakses"));
+      }
 
-          const data = await res.json();
+      // ================= LOGIN =================
+      function login() {
+        const usernameVal = username.value.trim();
+        const passwordVal = password.value.trim();
 
-          if (data.error) {
-            showMessage(data.error);
-          } else {
-            localStorage.setItem("user", JSON.stringify(data.user));
-            localStorage.setItem("token", data.token);
-
-            window.location.href = "chat.html";
-          }
-        } catch (err) {
-          showMessage("Server tidak bisa diakses");
+        if (!usernameVal || !passwordVal) {
+          return showMessage("Username & Password wajib diisi!");
         }
+
+        fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: usernameVal,
+            password: passwordVal,
+          }),
+        })
+          .then((r) => r.json())
+          .then((data) => {
+            if (data.error) {
+              showMessage(data.error);
+            } else {
+              localStorage.setItem("user", JSON.stringify(data.user));
+              localStorage.setItem("token", data.token);
+
+              window.location.href = "chat.html";
+            }
+          })
+          .catch(() => showMessage("Server tidak bisa diakses"));
       }
     </script>
   </body>
