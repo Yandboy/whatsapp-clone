@@ -99,6 +99,7 @@ body {
 .container {
   display: flex;
   height: 100vh;
+  overflow: hidden;
 }
 
 /* SIDEBAR */
@@ -146,11 +147,18 @@ body {
 }
 /* HEADER */
 .chat-header {
-  padding: 12px;
+  padding: 10px;
   background: #ededed;
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  background: #ccc;
+  border-radius: 50%;
 }
 
 .back-btn {
