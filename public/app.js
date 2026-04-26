@@ -50,7 +50,7 @@ function openChat(e, chatId, name) {
 
   e.target.classList.add("active");
 
-  loadMessages(); // 🔥 penting
+  loadMessages();
 }
 
 // ================= LOAD MESSAGES =================
