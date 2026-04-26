@@ -60,12 +60,6 @@ function openChat(e, id, name) {
 function showSidebar() {
   document.querySelector(".sidebar").style.display = "block";
 }
-// MOBILE
-if (window.innerWidth < 768) {
-  document.getElementById("sidebar").style.display = "none";
-}
-
-loadMessages();
 
 // LOAD MESSAGE
 function loadMessages() {
