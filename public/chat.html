@@ -19,6 +19,7 @@
         <!-- HEADER -->
         <div class="chat-header">
           <span class="back-btn" onclick="showSidebar()">⬅</span>
+          <div class="avatar"></div>
           <span id="chatTitle">Pilih Chat</span>
         </div>
 
@@ -27,7 +28,7 @@
 
         <!-- INPUT -->
         <div class="input-box">
-          <input id="message" placeholder="Ketik pesan..." />
+          <input id="message" placeholder="Ketik pesan..." oninput="typing()" />
           <button onclick="sendMessage()">➤</button>
         </div>
       </div>
