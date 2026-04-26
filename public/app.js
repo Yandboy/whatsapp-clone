@@ -1,4 +1,4 @@
-const BASE_URL = "http://72.61.140.205:5000"; // kalau VPS isi: "http://IP_VPS:5000"
+const BASE_URL = "http://72.61.140.205:5000";
 
 const socket = io(BASE_URL);
 
@@ -50,7 +50,17 @@ function openChat(e, chatId, name) {
 
   e.target.classList.add("active");
 
+  // 🔥 FIX MOBILE (HIDE SIDEBAR)
+  if (window.innerWidth < 768) {
+    document.querySelector(".sidebar").style.display = "none";
+  }
+
   loadMessages();
+}
+
+// ================= BACK BUTTON =================
+function showSidebar() {
+  document.querySelector(".sidebar").style.display = "flex";
 }
 
 // ================= LOAD MESSAGES =================
@@ -84,13 +94,11 @@ function sendMessage() {
 
   socket.emit("private_message", msg);
 
-  // ❌ HAPUS renderMessage di sini (biar tidak dobel)
   input.value = "";
 }
 
 // ================= RECEIVE =================
 socket.on("private_message", (data) => {
-  // 🔥 hanya tampilkan kalau chat aktif
   if (!activeChat) return;
 
   if (data.sender_id === activeChat.id || data.receiver_id === activeChat.id) {

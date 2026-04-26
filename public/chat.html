@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>WhatsApp Clone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <div class="container">
       <!-- SIDEBAR -->
@@ -13,13 +15,17 @@
 
       <!-- CHAT -->
       <div class="chat-area">
+        <!-- HEADER -->
         <div class="chat-header">
+          <span onclick="showSidebar()" style="cursor: pointer">⬅</span>
           <span id="chatTitle">Pilih Chat</span>
           <span id="typing" class="typing"></span>
         </div>
 
+        <!-- MESSAGES -->
         <div id="messages" class="messages"></div>
 
+        <!-- INPUT -->
         <div class="input-box">
           <input id="message" oninput="typing()" placeholder="Tulis pesan..." />
           <button onclick="sendMessage()">Kirim</button>
@@ -27,7 +33,7 @@
       </div>
     </div>
 
-    <!-- WAJIB URUTAN INI -->
+    <!-- SCRIPT -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="/app.js"></script>
   </body>
