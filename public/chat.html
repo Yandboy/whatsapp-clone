@@ -8,27 +8,31 @@
 
   <body>
     <div class="container">
-      <!-- SIDEBAR -->
       <div class="sidebar">
+        <div class="sidebar-header">Chats</div>
         <div id="userList"></div>
       </div>
 
       <!-- CHAT -->
       <div class="chat-area">
-        <!-- HEADER -->
         <div class="chat-header">
-          <span onclick="showSidebar()" style="cursor: pointer">⬅</span>
-          <span id="chatTitle">Pilih Chat</span>
-          <span id="typing" class="typing"></span>
+          <div class="header-left">
+            <span class="back-btn" onclick="showSidebar()">⬅</span>
+            <div class="avatar"></div>
+            <div>
+              <div id="chatTitle">Pilih Chat</div>
+              <div id="typing" class="typing"></div>
+            </div>
+          </div>
         </div>
 
-        <!-- MESSAGES -->
+        <!-- CHAT -->
         <div id="messages" class="messages"></div>
 
         <!-- INPUT -->
         <div class="input-box">
-          <input id="message" oninput="typing()" placeholder="Tulis pesan..." />
-          <button onclick="sendMessage()">Kirim</button>
+          <input id="message" oninput="typing()" placeholder="Ketik pesan..." />
+          <button onclick="sendMessage()">➤</button>
         </div>
       </div>
     </div>
