@@ -3,9 +3,9 @@ const mysql = require("mysql2");
 // buat koneksi
 const db = mysql.createConnection({
   host: "127.0.0.1",
-  user: "root",
+  user: "chatuser",
   password: "123456",
-  database: "chatuser",
+  database: "chat_app",
 });
 
 // connect ke database
