@@ -1,6 +1,4 @@
-/* =========================
-   RESET
-========================= */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -8,87 +6,34 @@
   font-family: Arial, sans-serif;
 }
 
-/* =========================
-   LOGIN / REGISTER
-========================= */
-.auth-container {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #d7f8f0, #e5ddd5);
+html,
+body {
+  height: 100%;
 }
 
-.auth-box {
-  width: 100%;
-  max-width: 360px;
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  text-align: center;
-}
-
-.auth-box h2 {
-  margin-bottom: 20px;
-  color: #128c7e;
-}
-
-.auth-box input {
-  width: 100%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
-.auth-box button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.auth-box button:first-of-type {
-  background: #128c7e;
-  color: white;
-}
-
-.auth-box a button {
-  background: #25d366;
-  color: white;
-}
-
-.link {
-  margin-top: 10px;
-  font-size: 13px;
-}
-
-/* =========================
-   APP WRAPPER
-========================= */
+/* WRAPPER */
 .container {
   display: flex;
-  height: 100vh;
+  height: 100%;
   background: #dcdcdc;
 }
 
-/* =========================
-   SIDEBAR HEADER
-========================= */
+/* SIDEBAR */
+.sidebar {
+  width: 30%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
 .sidebar-header {
   padding: 15px;
   font-weight: bold;
   background: #ededed;
-  border-bottom: 1px solid #ddd;
 }
 
-/* =========================
-   USER ITEM
-========================= */
+/* USER ITEM */
 .chat-item {
   display: flex;
   align-items: center;
@@ -105,7 +50,6 @@
   background: #e9f5f3;
 }
 
-/* avatar fake */
 .chat-item::before {
   content: "";
   width: 40px;
@@ -114,21 +58,26 @@
   border-radius: 50%;
 }
 
-/* =========================
-   HEADER
-========================= */
+/* CHAT AREA */
+.chat-area {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  background: #efeae2;
+}
+
+/* HEADER */
 .chat-header {
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  gap: 10px;
+  padding: 10px;
   background: #ededed;
-  border-bottom: 1px solid #ddd;
 }
 
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.back-btn {
+  display: none;
+  cursor: pointer;
 }
 
 .avatar {
@@ -138,37 +87,31 @@
   border-radius: 50%;
 }
 
-.back-btn {
-  cursor: pointer;
-  display: none;
+/* MESSAGES */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
 }
 
-/* =========================
-   CHAT BUBBLE (REALISTIC)
-========================= */
+/* BUBBLE */
 .msg {
-  max-width: 65%;
-  padding: 10px 14px;
-  margin: 6px 0;
+  max-width: 60%;
+  padding: 10px;
+  margin: 5px 0;
   border-radius: 8px;
-  font-size: 14px;
-  position: relative;
 }
 
 .me {
   background: #dcf8c6;
   margin-left: auto;
-  border-bottom-right-radius: 2px;
 }
 
 .other {
   background: #fff;
-  border-bottom-left-radius: 2px;
 }
 
-/* =========================
-   INPUT
-========================= */
+/* INPUT */
 .input-box {
   display: flex;
   padding: 10px;
@@ -178,44 +121,30 @@
 .input-box input {
   flex: 1;
   padding: 10px;
-  border-radius: 25px;
+  border-radius: 20px;
   border: none;
 }
 
 .input-box button {
   margin-left: 10px;
-  border-radius: 50%;
   width: 40px;
-  height: 40px;
+  border-radius: 50%;
   background: #128c7e;
   color: white;
+  border: none;
 }
 
-/* =========================
-   SCROLLBAR (BONUS)
-========================= */
-.messages::-webkit-scrollbar {
-  width: 6px;
-}
-
-.messages::-webkit-scrollbar-thumb {
-  background: #ccc;
-  border-radius: 10px;
-}
-/* =========================
-   MOBILE
-========================= */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
   }
 
   .sidebar {
+    position: absolute;
     width: 100%;
     height: 100%;
-    position: absolute;
     z-index: 10;
-    background: white;
   }
 
   .chat-area {

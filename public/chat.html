@@ -2,43 +2,45 @@
 <html>
   <head>
     <title>WhatsApp Clone</title>
+
+    <!-- WAJIB BIAR RESPONSIVE -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="container">
+      <!-- SIDEBAR -->
       <div class="sidebar">
-        <div class="sidebar-header">Chats</div>
+        <div class="sidebar-header">Chat</div>
         <div id="userList"></div>
       </div>
 
-      <!-- CHAT -->
+      <!-- CHAT AREA -->
       <div class="chat-area">
+        <!-- HEADER -->
         <div class="chat-header">
+          <span class="back-btn" onclick="showSidebar()">⬅</span>
+
           <div class="header-left">
-            <span class="back-btn" onclick="showSidebar()">⬅</span>
             <div class="avatar"></div>
-            <div>
-              <div id="chatTitle">Pilih Chat</div>
-              <div id="typing" class="typing"></div>
-            </div>
+            <span id="chatTitle">Pilih Chat</span>
           </div>
         </div>
 
-        <!-- CHAT -->
+        <!-- MESSAGES -->
         <div id="messages" class="messages"></div>
 
         <!-- INPUT -->
         <div class="input-box">
-          <input id="message" oninput="typing()" placeholder="Ketik pesan..." />
+          <input id="message" placeholder="Ketik pesan..." />
           <button onclick="sendMessage()">➤</button>
         </div>
       </div>
     </div>
 
-    <!-- SCRIPT -->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="/app.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
