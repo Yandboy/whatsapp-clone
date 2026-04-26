@@ -11,10 +11,10 @@ if (!user) {
 
 let activeChat = null;
 
-// ================= ONLINE =================
+// ONLINE
 socket.emit("join", user.id);
 
-// ================= LOAD USERS =================
+// LOAD USERS
 function loadUsers() {
   fetch(BASE_URL + "/users")
     .then((res) => res.json())
@@ -27,26 +27,18 @@ function loadUsers() {
 
         const div = document.createElement("div");
         div.className = "chat-item";
-
-        div.innerHTML = `
-          <div class="avatar"></div>
-          <div>
-            <div class="username">${u.username}</div>
-            <div class="last-msg">Klik untuk chat</div>
-          </div>
-        `;
+        div.innerText = u.username;
 
         div.onclick = (e) => openChat(e, u.id, u.username);
 
         list.appendChild(div);
       });
-    })
-    .catch(() => console.log("Gagal load users"));
+    });
 }
 
-// ================= OPEN CHAT =================
-function openChat(e, chatId, name) {
-  activeChat = { id: chatId, name };
+// OPEN CHAT
+function openChat(e, id, name) {
+  activeChat = { id, name };
 
   document.getElementById("chatTitle").innerText = name;
 
@@ -56,7 +48,7 @@ function openChat(e, chatId, name) {
 
   e.currentTarget.classList.add("active");
 
-  // mobile: hide sidebar
+  // mobile hide sidebar
   if (window.innerWidth < 768) {
     document.querySelector(".sidebar").style.display = "none";
   }
@@ -64,12 +56,12 @@ function openChat(e, chatId, name) {
   loadMessages();
 }
 
-// ================= BACK BUTTON =================
+// BACK BUTTON
 function showSidebar() {
-  document.querySelector(".sidebar").style.display = "flex";
+  document.querySelector(".sidebar").style.display = "block";
 }
 
-// ================= LOAD MESSAGES =================
+// LOAD MESSAGE
 function loadMessages() {
   if (!activeChat) return;
 
@@ -79,14 +71,11 @@ function loadMessages() {
       const box = document.getElementById("messages");
       box.innerHTML = "";
 
-      messages.forEach((msg) => {
-        renderMessage(msg);
-      });
-    })
-    .catch(() => console.log("Gagal load messages"));
+      messages.forEach((msg) => renderMessage(msg));
+    });
 }
 
-// ================= SEND MESSAGE =================
+// SEND
 function sendMessage() {
   const input = document.getElementById("message");
 
@@ -103,7 +92,7 @@ function sendMessage() {
   input.value = "";
 }
 
-// ================= RECEIVE =================
+// RECEIVE
 socket.on("private_message", (data) => {
   if (!activeChat) return;
 
@@ -112,7 +101,7 @@ socket.on("private_message", (data) => {
   }
 });
 
-// ================= RENDER MESSAGE =================
+// RENDER
 function renderMessage(data) {
   const box = document.getElementById("messages");
 
@@ -121,26 +110,12 @@ function renderMessage(data) {
 
   div.innerHTML = `
     <div>${data.message}</div>
-    <div style="font-size:10px; opacity:0.6; margin-top:4px;">
-      ${new Date(data.created_at || Date.now()).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}
-    </div>
+    <small>${new Date(data.created_at || Date.now()).toLocaleTimeString()}</small>
   `;
 
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
 
-// ================= TYPING =================
-function typing() {
-  if (!activeChat) return;
-
-  socket.emit("typing", {
-    receiver_id: activeChat.id,
-  });
-}
-
-// ================= INIT =================
+// INIT
 loadUsers();
