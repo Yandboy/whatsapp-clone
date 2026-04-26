@@ -27,7 +27,14 @@ function loadUsers() {
 
         const div = document.createElement("div");
         div.className = "chat-item";
-        div.innerText = u.username;
+
+        div.innerHTML = `
+          <div class="avatar"></div>
+          <div>
+            <div class="username">${u.username}</div>
+            <div class="last-msg">Klik untuk chat</div>
+          </div>
+        `;
 
         div.onclick = (e) => openChat(e, u.id, u.username);
 
@@ -43,14 +50,13 @@ function openChat(e, chatId, name) {
 
   document.getElementById("chatTitle").innerText = name;
 
-  // highlight active
   document.querySelectorAll(".chat-item").forEach((el) => {
     el.classList.remove("active");
   });
 
-  e.target.classList.add("active");
+  e.currentTarget.classList.add("active");
 
-  // 🔥 FIX MOBILE (HIDE SIDEBAR)
+  // mobile: hide sidebar
   if (window.innerWidth < 768) {
     document.querySelector(".sidebar").style.display = "none";
   }
@@ -106,13 +112,22 @@ socket.on("private_message", (data) => {
   }
 });
 
-// ================= RENDER =================
+// ================= RENDER MESSAGE =================
 function renderMessage(data) {
   const box = document.getElementById("messages");
 
   const div = document.createElement("div");
   div.className = "msg " + (data.sender_id === user.id ? "me" : "other");
-  div.innerText = data.message;
+
+  div.innerHTML = `
+    <div>${data.message}</div>
+    <div style="font-size:10px; opacity:0.6; margin-top:4px;">
+      ${new Date(data.created_at || Date.now()).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      })}
+    </div>
+  `;
 
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
@@ -127,5 +142,5 @@ function typing() {
   });
 }
 
-// INIT
+// ================= INIT =================
 loadUsers();
