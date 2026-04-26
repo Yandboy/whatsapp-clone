@@ -5,16 +5,9 @@
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-
-/* ================= LOGIN ================= */
-html,
-body {
-  height: 100%;
-}
-
-/* CONTAINER LOGIN (ISOLATED) */
+/* CONTAINER UTAMA */
 .auth-container {
-  min-height: 100vh; /* FIX dari height */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,21 +30,24 @@ body {
   margin-bottom: 20px;
 }
 
-/* INPUT */
+/* INPUT GROUP */
 .input-group {
   width: 100%;
   margin-bottom: 15px;
 }
 
+/* INPUT */
 .input-group input {
   width: 100%;
-  padding: 12px; /* sedikit diperbesar biar rapi */
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
   outline: none;
   font-size: 14px;
+  transition: 0.3s;
 }
 
+/* FOCUS */
 .input-group input:focus {
   border-color: #667eea;
 }
@@ -59,13 +55,14 @@ body {
 /* BUTTON */
 .auth-box button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background: #667eea;
   border: none;
   color: #fff;
   font-size: 16px;
   border-radius: 6px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .auth-box button:hover {
@@ -78,12 +75,22 @@ body {
   font-size: 14px;
 }
 
-/* ================= CHAT ================= */
+/* MOBILE FIX */
+@media (max-width: 480px) {
+  .auth-box {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+html,
+body {
+  height: 100%;
+}
 
-/* GANTI NAMA container BIAR TIDAK TABRAKAN */
-.chat-container {
+/* WRAPPER */
+.container {
   display: flex;
-  height: 100vh;
+  height: 100%;
   background: #dcdcdc;
 }
 
@@ -205,7 +212,7 @@ body {
 
 /* ================= MOBILE ================= */
 @media (max-width: 768px) {
-  .chat-container {
+  .container {
     flex-direction: column;
   }
 
