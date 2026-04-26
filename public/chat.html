@@ -2,17 +2,14 @@
 <html>
   <head>
     <title>WhatsApp Clone</title>
-
-    <!-- WAJIB BIAR RESPONSIVE -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="container">
       <!-- SIDEBAR -->
-      <div class="sidebar">
+      <div class="sidebar" id="sidebar">
         <div class="sidebar-header">Chat</div>
         <div id="userList"></div>
       </div>
@@ -22,11 +19,7 @@
         <!-- HEADER -->
         <div class="chat-header">
           <span class="back-btn" onclick="showSidebar()">⬅</span>
-
-          <div class="header-left">
-            <div class="avatar"></div>
-            <span id="chatTitle">Pilih Chat</span>
-          </div>
+          <span id="chatTitle">Pilih Chat</span>
         </div>
 
         <!-- MESSAGES -->
@@ -41,6 +34,6 @@
     </div>
 
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js"></script>
+    <script src="/app.js"></script>
   </body>
 </html>
